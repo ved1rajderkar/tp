@@ -1,0 +1,337 @@
+[gd_scene load_steps=24 format=3 uid="uid://player_ragdoll_scene"]
+
+[ext_resource type="Script" path="res://scripts/ragdoll_target.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/ragdoll_body_part.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/player_ragdoll.gd" id="3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_head"]
+size = Vector2(20, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_torso"]
+size = Vector2(16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upper_arm"]
+size = Vector2(8, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lower_arm"]
+size = Vector2(8, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upper_leg"]
+size = Vector2(10, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lower_leg"]
+size = Vector2(8, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bow"]
+size = Vector2(4, 40)
+
+[node name="PlayerRagdoll" type="Node2D"]
+script = ExtResource("1")
+active_balance = true
+balance_torque = 2500.0
+angular_damping_force = 15.0
+height_hold_force = 600.0
+leg_support_force = 300.0
+
+[node name="Torso" type="RigidBody2D" parent="."]
+position = Vector2(0, 0)
+collision_layer = 2
+collision_mask = 1
+mass = 5.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 2.0
+script = ExtResource("2")
+limb_id = 1
+damage_multiplier = 1.0
+hit_color = Color(1, 0.3, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Torso"]
+shape = SubResource("RectangleShape2D_torso")
+
+[node name="Visual" type="ColorRect" parent="Torso"]
+offset_left = -8.0
+offset_top = -16.0
+offset_right = 8.0
+offset_bottom = 16.0
+color = Color(0.2, 0.6, 0.3, 1)
+
+[node name="Head" type="RigidBody2D" parent="."]
+position = Vector2(0, -28)
+collision_layer = 2
+collision_mask = 1
+mass = 2.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 0
+damage_multiplier = 3.0
+hit_color = Color(1, 0, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+shape = SubResource("RectangleShape2D_head")
+
+[node name="Visual" type="ColorRect" parent="Head"]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.9, 0.75, 0.6, 1)
+
+[node name="UpperArmL" type="RigidBody2D" parent="."]
+position = Vector2(-16, -10)
+collision_layer = 2
+collision_mask = 1
+mass = 1.5
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 2
+damage_multiplier = 0.5
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperArmL"]
+shape = SubResource("RectangleShape2D_upper_arm")
+
+[node name="Visual" type="ColorRect" parent="UpperArmL"]
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+color = Color(0.2, 0.6, 0.3, 1)
+
+[node name="LowerArmL" type="RigidBody2D" parent="."]
+position = Vector2(-22, 10)
+collision_layer = 2
+collision_mask = 1
+mass = 1.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 3
+damage_multiplier = 0.5
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerArmL"]
+shape = SubResource("RectangleShape2D_lower_arm")
+
+[node name="Visual" type="ColorRect" parent="LowerArmL"]
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+color = Color(0.9, 0.75, 0.6, 1)
+
+[node name="UpperArmR" type="RigidBody2D" parent="."]
+position = Vector2(16, -10)
+collision_layer = 2
+collision_mask = 1
+mass = 1.5
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 4
+damage_multiplier = 0.5
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperArmR"]
+shape = SubResource("RectangleShape2D_upper_arm")
+
+[node name="Visual" type="ColorRect" parent="UpperArmR"]
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+color = Color(0.2, 0.6, 0.3, 1)
+
+[node name="LowerArmR" type="RigidBody2D" parent="."]
+position = Vector2(22, 10)
+collision_layer = 2
+collision_mask = 1
+mass = 1.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 5
+damage_multiplier = 0.5
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerArmR"]
+shape = SubResource("RectangleShape2D_lower_arm")
+
+[node name="Visual" type="ColorRect" parent="LowerArmR"]
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+color = Color(0.9, 0.75, 0.6, 1)
+
+[node name="UpperLegL" type="RigidBody2D" parent="."]
+position = Vector2(-6, 20)
+collision_layer = 2
+collision_mask = 1
+mass = 2.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 6
+damage_multiplier = 0.75
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLegL"]
+shape = SubResource("RectangleShape2D_upper_leg")
+
+[node name="Visual" type="ColorRect" parent="UpperLegL"]
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 5.0
+offset_bottom = 12.0
+color = Color(0.15, 0.15, 0.4, 1)
+
+[node name="LowerLegL" type="RigidBody2D" parent="."]
+position = Vector2(-6, 46)
+collision_layer = 2
+collision_mask = 1
+mass = 1.5
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 7
+damage_multiplier = 0.75
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerLegL"]
+shape = SubResource("RectangleShape2D_lower_leg")
+
+[node name="Visual" type="ColorRect" parent="LowerLegL"]
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 12.0
+color = Color(0.9, 0.75, 0.6, 1)
+
+[node name="UpperLegR" type="RigidBody2D" parent="."]
+position = Vector2(6, 20)
+collision_layer = 2
+collision_mask = 1
+mass = 2.0
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 8
+damage_multiplier = 0.75
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLegR"]
+shape = SubResource("RectangleShape2D_upper_leg")
+
+[node name="Visual" type="ColorRect" parent="UpperLegR"]
+offset_left = -5.0
+offset_top = -12.0
+offset_right = 5.0
+offset_bottom = 12.0
+color = Color(0.15, 0.15, 0.4, 1)
+
+[node name="LowerLegR" type="RigidBody2D" parent="."]
+position = Vector2(6, 46)
+collision_layer = 2
+collision_mask = 1
+mass = 1.5
+gravity_scale = 1.0
+linear_damp = 2.0
+angular_damp = 5.0
+script = ExtResource("2")
+limb_id = 9
+damage_multiplier = 0.75
+hit_color = Color(1, 0.6, 0.3, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerLegR"]
+shape = SubResource("RectangleShape2D_lower_leg")
+
+[node name="Visual" type="ColorRect" parent="LowerLegR"]
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 4.0
+offset_bottom = 12.0
+color = Color(0.9, 0.75, 0.6, 1)
+
+[node name="Bow" type="Node2D" parent="LowerArmR"]
+position = Vector2(0, -6)
+rotation = 0.0
+
+[node name="BowBody" type="ColorRect" parent="LowerArmR/Bow"]
+offset_left = -2.0
+offset_top = -20.0
+offset_right = 2.0
+offset_bottom = 20.0
+color = Color(0.4, 0.25, 0.1, 1)
+
+[node name="BowString" type="Line2D" parent="LowerArmR/Bow"]
+points = PackedVector2Array(0, -18, 0, 18)
+width = 1.0
+default_color = Color(0.8, 0.8, 0.8, 1)
+
+[node name="HeadToTorso" type="PinJoint2D" parent="."]
+node_a = NodePath("../Torso")
+node_b = NodePath("../Head")
+position = Vector2(0, -18)
+softness = 0.0
+
+[node name="TorsoToUpperArmL" type="PinJoint2D" parent="."]
+node_a = NodePath("../Torso")
+node_b = NodePath("../UpperArmL")
+position = Vector2(-10, -10)
+softness = 0.0
+
+[node name="UpperArmLToLowerArmL" type="PinJoint2D" parent="."]
+node_a = NodePath("../UpperArmL")
+node_b = NodePath("../LowerArmL")
+position = Vector2(-18, 4)
+softness = 0.0
+
+[node name="TorsoToUpperArmR" type="PinJoint2D" parent="."]
+node_a = NodePath("../Torso")
+node_b = NodePath("../UpperArmR")
+position = Vector2(10, -10)
+softness = 0.0
+
+[node name="UpperArmRToLowerArmR" type="PinJoint2D" parent="."]
+node_a = NodePath("../UpperArmR")
+node_b = NodePath("../LowerArmR")
+position = Vector2(18, 4)
+softness = 0.0
+
+[node name="TorsoToUpperLegL" type="PinJoint2D" parent="."]
+node_a = NodePath("../Torso")
+node_b = NodePath("../UpperLegL")
+position = Vector2(-6, 14)
+softness = 0.0
+
+[node name="UpperLegLToLowerLegL" type="PinJoint2D" parent="."]
+node_a = NodePath("../UpperLegL")
+node_b = NodePath("../LowerLegL")
+position = Vector2(-6, 34)
+softness = 0.0
+
+[node name="TorsoToUpperLegR" type="PinJoint2D" parent="."]
+node_a = NodePath("../Torso")
+node_b = NodePath("../UpperLegR")
+position = Vector2(6, 14)
+softness = 0.0
+
+[node name="UpperLegRToLowerLegR" type="PinJoint2D" parent="."]
+node_a = NodePath("../UpperLegR")
+node_b = NodePath("../LowerLegR")
+position = Vector2(6, 34)
+softness = 0.0
+
+[node name="BowController" type="Node2D" parent="."]
+script = ExtResource("3")
